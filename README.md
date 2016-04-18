@@ -30,7 +30,7 @@ First release v1.0.0
 - [ ] Bot is compatible with the Economy cog.  
 - [ ] Create a PokeMart and sell pokeballs.  
 - [ ] Create Tiers of rarities for pokemon.  
-- [ ] Have all the pokemon in tha Kanto region catchable!  
+- [ ] Have all the pokemon in the Kanto region catchable!  
 - [ ] Catch and stored into pokedex (will be used as PC)  
 - [ ] Complete a commands page.  
 - [ ] When PokeDex is completed, obtain 'Pokemon Master' tag in the server.  
