@@ -10,12 +10,16 @@ import os
 import time
 #import logging
 
-"""-----------------------------------------------------------
-                      ||Store Data||
------------------------------------------------------------"""
+"""-----------------------------------------------------------------------------------------------------------------------------------
+                                                          ||Store Data||
+-----------------------------------------------------------------------------------------------------------------------------------"""
 
 ECON_DIR = "data/economy/bank.json"
 #SPRITES = http://randompokemon.com/ (NEED TO CONTACT)
+
+"""-----------------------------------------------------------------------------------------------------------------------------------
+                                              || Start Creating Commands for the Bot ||
+-----------------------------------------------------------------------------------------------------------------------------------"""
 
 class Kanto:
   """
@@ -37,3 +41,33 @@ class Kanto:
   
   @_pokemon.command(pass_contex=True):
   async def register():
+    """ Registers the user to become a pokemon trainer """
+    
+
+"""-----------------------------------------------------------------------------------------------------------------------------------
+                                                      || End of Commands ||
+                                                || Start of Background Check ||
+-----------------------------------------------------------------------------------------------------------------------------------"""
+
+def check_folders():
+  """ Check to see if all the directories are present
+  
+  Add folders here if needed for a new directory """
+  folders = ("data/KantoBot/", "data/KantoBot/pc/")
+  for folder in folders:
+    if not os.path.exsist(folder):
+      print("Building the directory " + folder + " ...")
+      os.makedir(folder)
+
+def check_files():
+  """ Check to see if all the needed files are downloaded
+  
+  Add files here if needed for new file """
+  file = "data/KantoBot/pc/users.json"
+  if not fileIO(file, "check"):
+    print("Adding in empty users.json ...")
+    fileIO(file, "save", [])
+
+def setup(bot):
+  game = Kanto(bot)
+  bot.add_cog(game)
