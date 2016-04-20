@@ -12,7 +12,10 @@ import random
 DATA_FILE_PATH = "data/kantobot/"
 PC_FILE = "pc.json"
 POKEMON_FILE = "pokemon.json"
-BASE_ROLE_NAME = "Trainer"
+POKERMART_FILE = "pokemart.json"
+BASE_ROLE_NAME = "@Trainer"
+GREETING = "Prof. Oak: Hello! Welcome to the world of Pokemon! Here at {}, there's about 151 pokemon out there! Let me assign" + 
+              " you a PokeDex so you can head out and start your adventure!\n"
 
 """-----------------------------------------------------------------------------------------------------------------------------------
                                               || Start Creating Commands for the Bot ||
@@ -21,8 +24,8 @@ BASE_ROLE_NAME = "Trainer"
 class Kanto:
     """
     Lets you catch random pokemon utilizing the economy cog.
-    Goal is to complete the PokeDex
-    You can purchase Pokeballs
+    Goal is to complete the PokeDex.
+    You can purchase Pokeballs at the pokemart.
     """
   
     def __init__(self, bot):
@@ -31,12 +34,13 @@ class Kanto:
         self.dex = fileIO(DATA_FILE_PATH + PC_FILE, "load")
         self.pokemon = fileIO(DATA_FILE_PATH + POKEMON_FILE, "load")
 
-    @commands.command()
+    #Seeing if the bot is responding. Will be removed for release later.
+    @commands.command(name="test", pass_context=True)
     async def isAlive(self):
         """Test bot is alive!"""
-        await self.bot.say("Hello World!")
+        print ("KantoBot is able to respond!")
 
-    @commands.command(pass_context=True, no_pm=True)
+    @commands.command(pass_context=True, no_pm=False) #When user checks pokedex, send PM, don't have it spam server chat.
     async def pokedex(self, ctx):
         """Pokedex"""
         user = ctx.message.author
@@ -46,8 +50,8 @@ class Kanto:
             str = ""
             for pokemon in dex_user["pokemon"]:
                 str += get_pokemon(self, pokemon)["name"]
-                str += " "
-            await self.bot.say(user.mention + " is travelling with " + str)
+                str += "\n" #Bug purposes, see if this goes through.
+            await self.bot.say(user.mention + " is travelling with: \n" + str)#Making it list style instead or long string of text.
             return
 
         print("No Pokedex found for " + user.name)
@@ -71,7 +75,7 @@ async def create_user(self, ctx):
 
     print("Creating kantobot info for user " + user.name)
 
-    # Create the base trainer role iff it doesn't exist
+    # Create the base trainer role if it doesn't exist
     if BASE_ROLE_NAME not in [role.name for role in server.roles]:
         print("No base role found. Creating channel wide role - " + BASE_ROLE_NAME)
         try:
@@ -92,9 +96,11 @@ async def create_user(self, ctx):
         # Add role to user
         await self.bot.add_roles(user, role)
         print("Gave " + BASE_ROLE_NAME + " role to " + user.name)
+        await self.bot.say(GREETTING).format(server.name)
     else:
         # User already has role
         print(BASE_ROLE_NAME + " role is already assigned to " + user.name)
+        await self.bot.say("Prof. Oak: Did you already finish you PokeDex?")#This will be assigned for !pokemon register if they have an account
 
     # Gives user random starter Pokemon
     starter = receive_starter(self, user)
@@ -166,6 +172,15 @@ def give_pokemon(self, user, number):
     # Reload information to memory
     self.dex = fileIO(DATA_FILE_PATH + PC_FILE, "load")
 
+def pokemart_settings(self, user):
+  """
+  Allows Server Owner or Server Admins
+  to change the currecny of their Pokemart
+  Setting Prices to PokeBalls
+  """
+  #Need to create a defualt setting here. Command to change setting would be !pokemon economy to allow them to change prices
+  #Possible If / Else statement? Else being default.
+  
 def check_folders():
     """
     Checks if data folders are created.
@@ -193,6 +208,12 @@ def check_files():
         print("WARNING: Empty " + f)
         print("WARNING: Please download a relevant Pokemon JSON file")
         fileIO(f, "save", [])
+    #Check PokeMart JSON
+    f = DATA_FILE_PATH + POKEMART_FILE
+    if not fileIO(f, "check"):
+      print("Downloading the Default PokeMart")
+      print("Check " + f + " to make sure it was downloaded correctly.")
+      fileIO(f, "save", [])
 
 def setup(bot):
     """
