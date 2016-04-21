@@ -12,7 +12,6 @@ import random
 DATA_FILE_PATH = "data/kantobot/"
 PC_FILE = "pc.json"
 POKEMON_FILE = "pokemon.json"
-POKERMART_FILE = "pokemart.json"
 BASE_ROLE_NAME = "@Trainer"
 GREETING = "Prof. Oak: Hello! Welcome to the world of Pokemon! Here at {}, there's about 151 pokemon out there! Let me assign" + 
               " you a PokeDex so you can head out and start your adventure!\n"
@@ -172,15 +171,7 @@ def give_pokemon(self, user, number):
     # Reload information to memory
     self.dex = fileIO(DATA_FILE_PATH + PC_FILE, "load")
 
-def pokemart_settings(self, user):
-  """
-  Allows Server Owner or Server Admins
-  to change the currecny of their Pokemart
-  Setting Prices to PokeBalls
-  """
-  #Need to create a defualt setting here. Command to change setting would be !pokemon economy to allow them to change prices
-  #Possible If / Else statement? Else being default.
-  
+
 def check_folders():
     """
     Checks if data folders are created.
@@ -208,12 +199,6 @@ def check_files():
         print("WARNING: Empty " + f)
         print("WARNING: Please download a relevant Pokemon JSON file")
         fileIO(f, "save", [])
-    #Check PokeMart JSON
-    f = DATA_FILE_PATH + POKEMART_FILE
-    if not fileIO(f, "check"):
-      print("Downloading the Default PokeMart")
-      print("Check " + f + " to make sure it was downloaded correctly.")
-      fileIO(f, "save", [])
 
 def setup(bot):
     """
