@@ -75,7 +75,7 @@ async def create_user(self, ctx):
 
     print("Creating kantobot info for user " + user.name)
 
-    # Create the base trainer role if it doesn't exist
+    # Create the base trainer role iff it doesn't exist
     if BASE_ROLE_NAME not in [role.name for role in server.roles]:
         print("No base role found. Creating channel wide role - " + BASE_ROLE_NAME)
         try:
@@ -100,7 +100,7 @@ async def create_user(self, ctx):
     else:
         # User already has role
         print(BASE_ROLE_NAME + " role is already assigned to " + user.name)
-        await self.bot.say("Prof. Oak: Did you already finish you PokeDex?")#This will be assigned for !pokemon register if they have an account
+        await self.bot.say("Prof. Oak: Did you already finish your PokeDex?")#This will be assigned for !pokemon register if they have an account
 
     # Gives user random starter Pokemon
     starter = receive_starter(self, user)
