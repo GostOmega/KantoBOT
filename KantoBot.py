@@ -1,6 +1,7 @@
 import discord
 from discord.ext import commands
 from .utils.dataIO import fileIO
+from .utils import checks
 from time import ctime
 import os
 import random
@@ -13,8 +14,6 @@ DATA_FILE_PATH = "data/kantobot/"
 PC_FILE = "pc.json"
 POKEMON_FILE = "pokemon.json"
 BASE_ROLE_NAME = "@Trainer"
-GREETING = "Prof. Oak: Hello! Welcome to the world of Pokemon! Here at {}, there's about 151 pokemon out there! Let me assign" + 
-              " you a PokeDex so you can head out and start your adventure!\n"
 
 """-----------------------------------------------------------------------------------------------------------------------------------
                                               || Start Creating Commands for the Bot ||
@@ -95,7 +94,7 @@ async def create_user(self, ctx):
         # Add role to user
         await self.bot.add_roles(user, role)
         print("Gave " + BASE_ROLE_NAME + " role to " + user.name)
-        await self.bot.say(GREETTING).format(server.name)
+        await self.bot.say("Prof. Oak: Hello! Welcome to the world of Pokemon! Here at " + server.name + ", there's about 151 pokemon out there! Let me assign you a PokeDex so you can head out and start your adventure!\n")
     else:
         # User already has role
         print(BASE_ROLE_NAME + " role is already assigned to " + user.name)
