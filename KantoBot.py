@@ -23,7 +23,6 @@ class Kanto:
     """
     Lets you catch random pokemon utilizing the economy cog.
     Goal is to complete the PokeDex.
-    You can purchase Pokeballs at the pokemart.
     """
   
     def __init__(self, bot):
