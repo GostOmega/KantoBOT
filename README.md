@@ -46,3 +46,6 @@ Second release v2.0.0
 - [ ] Generate pvp fights, evolved tiers have higher hp and chance of win against first generation.  
 - [ ] Logged PokeDex = PC access for party.  
 - [ ] Bot announces PvP and new catches, no_pm=False on training and party commands.
+
+## Discord Server
+[<img src="https://discordapp.com/api/servers/159505201881939969/widget.png?style=banner2">](https://discord.gg/0tErHaELIEhDTh9f)
