@@ -48,4 +48,4 @@ Second release v2.0.0
 - [ ] Bot announces PvP and new catches, no_pm=False on training and party commands.
 
 ## Discord Server
-[<img src="https://discordapp.com/api/servers/159505201881939969/widget.png?style=banner2">](https://discord.gg/0tErHaELIEhDTh9f)
+[<img src="https://discordapp.com/api/servers/159505201881939969/widget.png?style=banner4">](https://discord.gg/0tErHaELIEhDTh9f)
